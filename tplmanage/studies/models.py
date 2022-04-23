@@ -16,7 +16,7 @@ class Study(models.Model):
     study_status = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'study'
 
 
@@ -29,7 +29,7 @@ class Sample(models.Model):
     pull_date = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'sample'
 
 
@@ -47,7 +47,7 @@ class Management(models.Model):
     po_current = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'management'
 
 
@@ -61,5 +61,5 @@ class Result(models.Model):
     result_num = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'result'

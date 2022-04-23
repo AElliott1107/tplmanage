@@ -1,0 +1,140 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <form method="post" enctype="multipart/form-data" novalidate>
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors or form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <h5>Oh no! Form not submitted!</h5>
+                        <p>Please see errors in the form below.</p>
+                        {% if form.non_field_errors %}
+                            <p>If no fields are highlighted red, maybe this will help:</p>
+                            <ul>
+                                {% for non_field_error in form.non_field_errors %}
+                                    <li><h6 class="mb-0">{{ non_field_error }}</h6></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="mb-4">Update a Previously Submitted Study</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header"><strong>Study Information</strong></div>
+
+                    <div class="card-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.study_id }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.project }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.provider }}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.study_start }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.study_status }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header"><strong>Sample Pulls</strong></div>
+
+                    <div class="card-body">
+                        <p>In the following table, please enter dates in the YYYY-MM-DD format.</p>
+                        {{ formset.management_form }}
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Sample ID</th>
+                                <th>Pull Date</th>
+                                <th>Timepoint</th>
+                                <th>Storage Condition</th>
+                                <th>Quality Level</th>
+                                <th>Invoice Amount</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody class="dynamic-formset">
+                            {% for form in formset %}
+                                <tr class="w-75">
+                                <td>{{ form.id }}</td>
+                                    <td>{{ form.sample_id }}</td>
+                                    <td>{{ form.pull_date }}</td>
+                                    <td>{{ form.pull_condition }}</td>
+                                    <td>{{ form.timepoint }}</td>
+                                    <td>{{ form.quality }}</td>
+                                    <td>{{ form.DELETE|as_crispy_field }}</td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="add-btn"></div>
+                    </div>
+
+                </div>
+
+                <button type="reset" class="btn btn-abbvie mb-4">Clear</button>
+                <a href="{% url 'studies:study-home' %}" class="btn mb-4" role="button">Cancel</a>
+                <button type="submit" name="btn_submitted" class="btn mb-4">Submit to Team</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'dynamic_formsets/jquery.formset.js' %}">
+    </script>
+    <script type="text/javascript">
+        $('.dynamic-formset').formset({
+            addButtonHolder: '.add-btn',
+            addCssClass: 'btn btn-abbvie',
+            deleteCssClass: 'btn btn-danger',
+            prefix: '{{ formset.prefix }}',
+            uiText: {
+                addPrompt: '<span><i class="fas fa-plus" id="add_numBtn"></i></span>',
+                removePrompt: '<span><i class="fas fa-trash"></i></span>',
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+    </script>
+
+{% endblock content %}

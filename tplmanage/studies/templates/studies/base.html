@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block sidebar_links %}
+<li class="nav-link">
+    <a class="nav-link" href="{% url 'studies:home' %}">
+        <i class="fas fa-plus"></i>
+        Home
+    </a>
+</li>
+<li class="nav-link">
+    <a class="nav-link" href="{% url 'studies:study-home' %}">
+        <i class="fas fa-clipboard-list"></i>
+        Studies
+    </a>
+</li>
+<li class="nav-link">
+    <a class="nav-link" href="{% url 'studies:metrics' %}">
+        <i class="fas fa-calculator"></i>
+        Service Provider Metrics
+    </a>
+</li>
+<li class="nav-link">
+    <a class="nav-link" href="{% url 'studies:study-home' %}">
+        <i class="fas fa-calculator"></i>
+        Trend Study Data
+    </a>
+</li>
+{% endblock sidebar_links %}
+</head>
+<body>
+
+</body>
+</html>

@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'studies.apps.StudiesConfig'
+    'studies.apps.StudiesConfig',
+    'crispy_forms',
+    #'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -120,6 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = 'static/'
 
 # Default primary key field type
