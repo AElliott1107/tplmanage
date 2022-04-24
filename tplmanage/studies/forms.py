@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import *
+from django.forms.models import inlineformset_factory
 
 PROVIDERS = (
     ('Service Provider 1', 'Service Provider 1'),

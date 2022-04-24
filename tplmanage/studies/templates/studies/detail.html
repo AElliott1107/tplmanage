@@ -63,12 +63,18 @@
                             <th>Timepoint</th>
                             <th>Condition</th>
                             <th>Quality</th>
+                            <th>Edit Sample</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for pull in pulls %}
                             <tr>
-
+                                <td>{{ pull.sample_id }}</td>
+                                <td>{{ pull.pull_date }}</td>
+                                <td>{{ pull.timepoint }}</td>
+                                <td>{{ pull.pull_condition }}</td>
+                                <td>{{ pull.quality }}</td>
+                                <td><a href="{% url 'studies:sample-update' pull.pk %}" class="btn btn-primary" role="button">Edit</a></td>
                             </tr>
                         {% empty %}
                             <tr>

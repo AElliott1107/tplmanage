@@ -22,6 +22,11 @@ class StudiesHome(ListView):
 class StudyDetail(DetailView):
     model = Study
     template_name = 'studies/detail.html'
+    # Update context data to include samples attached to specific study
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pulls'] = self.object.sample_set.all()
+        return context
 
 
 # CRUD View - Create a new study
@@ -32,7 +37,7 @@ class CreateStudy(CreateView):
 
     # Update initial to create unique study ID
     def get_initial(self):
-        today = datetime.datetime.today()
+        today = datetime.date.today()
         initial = self.initial.copy()
         initial['study_id'] = 'APP' + str(today)
         return initial
@@ -45,6 +50,7 @@ class CreateStudy(CreateView):
             context['formset'] = sample_formset(self.request.POST)
         else:
             context['formset'] = sample_formset()
+        return context
 
     # Update form_valid to save the sample formset with the form
     def form_valid(self, form):
@@ -64,7 +70,7 @@ class CreateStudy(CreateView):
 
     # Update form_invalid to include formset
     def form_invalid(self, form, **kwargs):
-        formset = kwargs.pop('formset', None)
+        formset = kwargs.pop('samples', None)
         return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get_success_url(self):
@@ -86,6 +92,7 @@ class StudyUpdate(UpdateView):
             context['formset'] = sample_formset(self.request.POST, instance=self.object)
         else:
             context['formset'] = sample_formset(instance=self.object)
+        return context
 
     # Update form valid to save formset with form
     def form_valid(self, form):
@@ -130,6 +137,7 @@ class SampleUpdate(UpdateView):
         else:
             context['man_formset'] = management_formset(instance=self.object)
             context['result_formset'] = result_formset(instance=self.object)
+        return context
 
     # Update form valid to save formset with form
     def form_valid(self, form):

@@ -16,8 +16,11 @@ class Study(models.Model):
     study_status = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'study'
+
+    def __str__(self):
+        return self.study_id
 
 
 class Sample(models.Model):
@@ -29,8 +32,11 @@ class Sample(models.Model):
     pull_date = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'sample'
+
+    def __str__(self):
+        return self.sample_id
 
 
 class Management(models.Model):
@@ -47,8 +53,11 @@ class Management(models.Model):
     po_current = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'management'
+
+    def __str__(self):
+        return self.manage_id
 
 
 class Result(models.Model):
@@ -61,5 +70,8 @@ class Result(models.Model):
     result_num = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'result'
+
+    def __str__(self):
+        return self.result_id
