@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'dynamic_formsets',
     'bootstrap4',
-    'rest_framework'
+    'rest_framework',
+    'django_heroku'
 ]
 
 MIDDLEWARE = [
