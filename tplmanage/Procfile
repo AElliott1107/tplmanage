@@ -1,1 +1,1 @@
-web: gunicorn tplmanage.wsgi --log-file -
+web: gunicorn tplmanage.wsgi
