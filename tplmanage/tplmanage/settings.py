@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g#l95%-o&3wnhol+*&&-xui5^5jx94+2c7&xss#h375+fpem1t'
+# SECRET_KEY = 'django-insecure-g#l95%-o&3wnhol+*&&-xui5^5jx94+2c7&xss#h375+fpem1t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'tplmanage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'outsource',
-        'USER': 'appadmin',
-        'PASSWORD': 'outsourcing',
-        'HOST': 'localhost',
+        'NAME': 'heroku_d8dd69f03cb9f1a',
+        'USER': 'b76861215c6115',
+        'PASSWORD': 'aaca0107',
+        'HOST': 'us-cdbr-east-05.cleardb.net',
         'PORT': '3306',
     }
 }
@@ -139,3 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
+
+DATABASE_URL = os.getenv('DATABASE_URL')
+SECRET_KEY = os.getenv('SECRET_KEY')
