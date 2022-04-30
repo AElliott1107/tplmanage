@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>{% block title %}TPL Management - Study Detail{% endblock title%}</title>
+</head>
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="mb-4">{{ object.sample_id }}</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a type="button" href="{% url 'studies:study-update' object.study_id %}" class="btn btn-primary">
+                <span><i class="fas fa-pencil-alt"></i> Update
+                </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+
+                <div class="card-header"><strong>Sample Information</strong></div>
+
+                <div class="card-body">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0">
+                            Timepoint:  {{ object.timepoint }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            Pull Date:  {{ object.pull_date|date }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            Condition:  {{ object.pull_condition }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            Quality:  {{ object.quality }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+
+                <div class="card-header"><strong>Management Information</strong></div>
+                <div class="card-body">
+                    <br>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>PO Number</th>
+                            <th>Contract</th>
+                            <th>Shipment</th>
+                            <th>Result Received Date</th>
+                            <th>Results Corrected</th>
+                            <th>Invoice Received Date</th>
+                            <th>Invoice Corrected</th>
+                            <th>Invoice Amount</th>
+                            <th>Current PO Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{ log.po_num }}</td>
+                                <td>{{ log.contract }}</td>
+                                <td>{{ log.shipment }}</td>
+                                <td>{{ log.result_rec }}</td>
+                                <td>{{ log.result_corr }}</td>
+                                <td>{{ log.invoice_rec }}</td>
+                                <td>{{ log.invoice_corr }}</td>
+                                <td>{{ log.invoice_amt }}</td>
+                                <td>{{ log.po_current }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="bg-warning">No Management Information Yet!</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><strong>Result Information</strong></div>
+                <div class="card-body">
+                    <br>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Component</th>
+                            <th>Result Status</th>
+                            <th>Result Number</th>
+                            <th>Reported As</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.test_name }}</td>
+                                <td>{{ result.component }}</td>
+                                <td>{{ result.result_status }}</td>
+                                <td>{{ result.result_num }}</td>
+                                <td>{{ result.reported }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="bg-warning">No Results Yet!</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'studies:study-detail' object.study.id %}" class="btn btn-primary" role="button">Return to Study</a>
+    </div>
+
+{% endblock content %}
+</html>

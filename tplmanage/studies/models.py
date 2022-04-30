@@ -9,22 +9,19 @@ from django.db import models
 
 
 class Study(models.Model):
-    study_id = models.CharField(primary_key=True, max_length=50)
+    study_num = models.CharField(max_length=50)
     project = models.CharField(max_length=50)
     provider = models.CharField(max_length=100)
     study_start = models.DateField(blank=True, null=True)
     study_status = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'study'
-
-    def __str__(self):
-        return self.study_id
 
 
 class Sample(models.Model):
-    sample_id = models.CharField(primary_key=True, max_length=50)
+    sample_num = models.CharField(max_length=50, blank=True, null=True)
     study = models.ForeignKey('Study', on_delete=models.CASCADE)
     timepoint = models.FloatField(blank=True, null=True)
     pull_condition = models.CharField(max_length=50)
@@ -32,11 +29,8 @@ class Sample(models.Model):
     pull_date = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'sample'
-
-    def __str__(self):
-        return self.sample_id
 
 
 class Management(models.Model):
@@ -53,11 +47,8 @@ class Management(models.Model):
     po_current = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'management'
-
-    def __str__(self):
-        return self.manage_id
 
 
 class Result(models.Model):
@@ -70,8 +61,5 @@ class Result(models.Model):
     result_num = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'result'
-
-    def __str__(self):
-        return self.result_id

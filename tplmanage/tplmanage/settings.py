@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'studies.apps.StudiesConfig',
     'crispy_forms',
     'dynamic_formsets',
-    'bootstrap4'
+    'bootstrap4',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

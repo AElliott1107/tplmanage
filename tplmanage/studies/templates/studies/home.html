@@ -90,7 +90,7 @@
                 {% for request in object_list %}
                     <tr>
                         <td>
-                            <a href="{% url 'studies:study-detail' request.pk %}">{{ request.study_id }}</a>
+                            <a href="{% url 'studies:study-detail' request.pk %}">{{ request.study_num }}</a>
                         </td>
                         <td>{{ request.project }}</td>
                         <td>{{ request.provider }}</td>
@@ -107,4 +107,3 @@
     </div>
 
 {% endblock content %}
-</html>

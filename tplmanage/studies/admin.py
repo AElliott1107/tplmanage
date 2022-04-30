@@ -22,7 +22,7 @@ class SampleInline(admin.TabularInline):
     model = Sample
     extra = 1
     fieldsets = [
-        (None, {'fields': ('timepoint', 'pull_condition', 'quality', 'pull_date')})
+        (None, {'fields': ('timepoint', 'pull_condition', 'quality', 'pull_date', 'sample_num')})
     ]
 
 

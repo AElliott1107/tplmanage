@@ -1,0 +1,166 @@
+{% extends 'studies/base.html' %}
+
+{% block title %} Monitor Service Provider Performance {% endblock title %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        const ctx = document.getElementById('invoiceChart').getContext('2d');
+        const ctx2 = document.getElementById('resultChart').getContext('2d');
+        const ctx3 = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(ctx3, {
+            type: 'pie',
+            options: {
+                responsive: true,
+              },
+            data: {
+                labels: [{% for item in p_label %}'{{item}}',{% endfor %}],
+                datasets: [
+                    {
+                        label: 'Sample Count',
+                        data: [{% for num in p_count %}{{num}},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            },
+        });
+        const invoiceChart = new Chart(ctx, {
+            type: 'bar',
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        stacked: true
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            },
+            data: {
+                labels: [{% for item in in_label %}'{{item}}',{% endfor %}],
+                datasets: [
+                    {
+                        label: 'No',
+                        data: [{% for num in in_no %}{{num}},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Yes',
+                        data: [{% for num in in_yes %}{{num}},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(153, 102, 255, 1)',
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            },
+        });
+        const resultChart = new Chart(ctx2, {
+            type: 'bar',
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        stacked: true
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            },
+            data: {
+                labels: [{% for item in r_label %}'{{item}}',{% endfor %}],
+                datasets: [
+                    {
+                        label: 'No',
+                        data: [{% for num in r_no %}{{num}},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Yes',
+                        data: [{% for num in r_yes %}{{num}},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(153, 102, 255, 1)',
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            },
+        });
+    })
+</script>
+{% endblock scripts %}
+
+{% block content %}
+
+<div class="container" style="width: 50%;">
+    <h5>Sample Count Per Service Provider</h5>
+    <canvas id="pieChart"></canvas>
+</div>
+<div class="container" style="width: 75%;">
+    <h5>Invoice Corrections Needed</h5>
+    <canvas id="invoiceChart"></canvas>
+    <h5>Result Corrections Needed</h5>
+    <canvas id="resultChart"></canvas>
+    <div class><a href="{% url 'studies:home' %}" class="btn btn-primary" role="button">Return Home</a></div>
+</div>
+
+
+{% endblock content %}

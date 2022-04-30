@@ -26,6 +26,24 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
+                        {% if form.errors %}
+                            <p>The selected fields need updated.</p>
+                            <ul>
+                                {% for form_error in form.errors %}
+                                    <li><h6 class="mb-0">{{ form_error }}</h6></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% for dict in man_formset.errors %}
+                            {% for error in dict.values %}
+                                {{ error }}
+                            {% endfor %}
+                        {% endfor %}
+                        {% for dict in result_formset.errors %}
+                            {% for error in dict.values %}
+                                {{ error }}
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                 {% endif %}
 
@@ -43,21 +61,25 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-4 mb-0">
-                                {{ form.sample_id|as_crispy_field }}
+                                Sample ID: {{ form.sample_num|as_crispy_field }}
                             </div>
                             <div class="form-group col-md-4 mb-0">
-                                {{ form.pull_date|as_crispy_field }}
+                                Pull Date: {{ form.pull_date|as_crispy_field }}
                             </div>
                             <div class="form-group col-md-4 mb-0">
-                                {{ form.timepoint|as_crispy_field }}
+                                Timepoint: {{ form.timepoint|as_crispy_field }}
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4 mb-0">
-                                {{ form.pull_condition|as_crispy_field }}
+                                Condition: {{ form.pull_condition|as_crispy_field }}
                             </div>
                             <div class="form-group col-md-4 mb-0">
-                                {{ form.quality|as_crispy_field }}
+                                Quality: {{ form.quality|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.id }}
+                                {{ form.study }}
                             </div>
                         </div>
                     </div>
@@ -84,11 +106,11 @@
                                 <th>Invoice Corrected</th>
                                 <th>Invoice Amount</th>
                                 <th>Current PO Amount</th>
-                                <th></th>
+                                <th>Delete Row</th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody class="dynamic-formset">
+                            <tbody class="man-dynamic-formset">
                             {% for mform in man_formset %}
                                 <tr class="w-75">
                                 <td>{{ mform.manage_id }}</td>
@@ -107,7 +129,7 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                        <div class="add-btn"></div>
+                        <div class="add-m-btn">Add Row: </div>
                     </div>
                 </div>
 
@@ -128,11 +150,11 @@
                                 <th>Result Status</th>
                                 <th>Result Number</th>
                                 <th>Reported As</th>
-                                <th></th>
+                                <th>Delete Row</th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody class="dynamic-formset">
+                            <tbody class="result-dynamic-formset">
                             {% for rform in result_formset %}
                                 <tr class="w-75">
                                 <td>{{ rform.result_id }}</td>
@@ -147,13 +169,13 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                        <div class="add-btn"></div>
+                        <div class="add-r-btn">Add Row: </div>
                     </div>
                 </div>
 
                 <button type="reset" class="btn btn-abbvie mb-4">Clear</button>
                 <a href="{% url 'studies:study-home' %}" class="btn mb-4" role="button">Cancel</a>
-                <button type="submit" name="btn_submitted" class="btn mb-4">Submit to Team</button>
+                <button type="submit" name="btn_submitted" class="btn mb-4">Submit</button>
 
             </form>
 
@@ -164,11 +186,23 @@
     <script src="{% static 'dynamic_formsets/jquery.formset.js' %}">
     </script>
     <script type="text/javascript">
-        $('.dynamic-formset').formset({
-            addButtonHolder: '.add-btn',
-            addCssClass: 'btn btn-abbvie',
+        $('.man-dynamic-formset').formset({
+            addButtonHolder: '.add-m-btn',
+            addCssClass: 'btn btn-primary',
             deleteCssClass: 'btn btn-danger',
-            prefix: '{{ formset.prefix }}',
+            prefix: '{{ man_formset.prefix }}',
+            uiText: {
+                addPrompt: '<span><i class="fas fa-plus" id="add_numBtn"></i></span>',
+                removePrompt: '<span><i class="fas fa-trash"></i></span>',
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $('.result-dynamic-formset').formset({
+            addButtonHolder: '.add-r-btn',
+            addCssClass: 'btn btn-primary',
+            deleteCssClass: 'btn btn-danger',
+            prefix: '{{ result_formset.prefix }}',
             uiText: {
                 addPrompt: '<span><i class="fas fa-plus" id="add_numBtn"></i></span>',
                 removePrompt: '<span><i class="fas fa-trash"></i></span>',
