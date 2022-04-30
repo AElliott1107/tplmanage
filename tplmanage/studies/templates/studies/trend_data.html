@@ -88,16 +88,25 @@
 {% endblock scripts %}
 
 {% block content %}
-
-<div class="container" style="width: 75%">
-    <h5>Purity Results Over Time</h5>
-    <canvas id="scatterPlot"></canvas>
+<div class="jumbotron jumbotron-fluid" style="background-color:#191970;">
+    <div class="container">
+        <h1 class="display-4" style="color:#eeeeee">Testing Results</h1>
+        <p class="lead" style="color:#eeeeee">Trend test results for samples.</p>
+    </div>
 </div>
-<div class="container" style="width: 75%;">
-    <h5>Purity Comparison by Test per Sample</h5>
-    <canvas id="barChart"></canvas>
-</div>
-<div class><a href="{% url 'studies:home' %}" class="btn btn-primary" role="button">Return Home</a></div>
 
+<div class="card">
+    <div class="card-body">
+        <div class="text-center"><a href="{% url 'studies:home' %}" class="btn btn-primary" role="button">Return Home</a></div>
+        <div class="container" style="width: 75%">
+            <h5>Purity Results Over Time</h5>
+            <canvas id="scatterPlot"></canvas>
+        </div>
+        <div class="container" style="width: 75%;">
+            <h5>Purity Comparison by Test per Sample</h5>
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

@@ -149,17 +149,26 @@
 {% endblock scripts %}
 
 {% block content %}
-
-<div class="container" style="width: 50%;">
-    <h5>Sample Count Per Service Provider</h5>
-    <canvas id="pieChart"></canvas>
+<div class="jumbotron jumbotron-fluid" style="background-color:#191970;">
+    <div class="container">
+        <h1 class="display-4" style="color:#eeeeee">Third Party Metrics</h1>
+        <p class="lead" style="color:#eeeeee">Track Service Provider Performance.</p>
+    </div>
 </div>
-<div class="container" style="width: 75%;">
-    <h5>Invoice Corrections Needed</h5>
-    <canvas id="invoiceChart"></canvas>
-    <h5>Result Corrections Needed</h5>
-    <canvas id="resultChart"></canvas>
-    <div class><a href="{% url 'studies:home' %}" class="btn btn-primary" role="button">Return Home</a></div>
+<div class="card">
+    <div class="card-body">
+        <div class="text-center"><a href="{% url 'studies:home' %}" class="btn btn-primary" role="button">Return Home</a></div>
+        <div class="container" style="width: 50%;">
+            <h3 class="text-center">Sample Count Per Service Provider</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+        <div class="container" style="width: 75%;">
+            <h3 class="text-center">Invoice Corrections Needed</h3>
+            <canvas id="invoiceChart"></canvas>
+            <h3 class="text-center">Result Corrections Needed</h3>
+            <canvas id="resultChart"></canvas>
+        </div>
+    </div>
 </div>
 
 

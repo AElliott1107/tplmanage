@@ -11,42 +11,42 @@
     <title>{% block title %}TPL Management{% endblock title%}</title>
 
 </head>
-
+<body style="background-color:#f0f8ff;padding:20px">
 {% block content %}
-    <div class="jumbotron jumbotron-fluid mb-0 bg-abbvie-gr">
+    <div class="jumbotron jumbotron-fluid mb-0" style="background-color:#191970;">
         <div class="container">
-            <h1 class="display-4">TPL Management</h1>
-            <p class="lead">Welcome to the Third Party Laboratory Mangement App!</p>
-            <p>Your home for all of your TPL management needs.  Please select which area of interest you would like to visit!</p>
+            <h1 class="display-4" style="color:#eeeeee">TPL Management</h1>
+            <p class="lead" style="color:#eeeeee">Welcome to the Third Party Laboratory Mangement App!</p>
+            <p style="color:#eeeeee">Your home for all of your TPL management needs.  Please select which area of interest you would like to visit!</p>
         </div>
     </div>
+<br>
+<br>
 
-<div class="card-deck mt-2 justify-content-center">
-    <div class="card mt-3 mx-2">
-        <a class="card" href="{% url 'studies:study-home' %}">
-            <div class="card-body">
-                <h5 class="card-title">Study Management</h5>
-                <p class="card-text">Visit here to create new or update existing study information.</p>
-            </div>
-        </a>
+<div class="card-deck mt-4 justify-content-center">
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Study Management</h5>
+            <p class="card-text">Visit here to create new or update existing study information.</p>
+            <a class="card btn btn-primary" href="{% url 'studies:study-home' %}">Click Here!</a>
+        </div>
     </div>
-    <div class="card mt-3 mx-2">
-        <a class="card" href="{% url 'studies:metrics' %}">
-            <div class="card-body">
-                <h5 class="card-title">Service Provider Metrics</h5>
-                <p class="card-text">Visit here to view metrics on service provider performance.</p>
-            </div>
-        </a>
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Service Provider Metrics</h5>
+            <p class="card-text">Visit here to view metrics on service provider performance.</p>
+            <a class="card btn btn-primary" href="{% url 'studies:metrics' %}">Click Here!</a>
+        </div>
     </div>
-    <div class="card mt-3 mx-2">
-        <a class="card" href="{% url 'studies:trends' %}">
-            <div class="card-body">
-                <h5 class="card-title">Trend Study Data</h5>
-                <p class="card-text">Visit here to view study data trends over time.</p>
-            </div>
-        </a>
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Trend Study Data</h5>
+            <p class="card-text">Visit here to view study data trends over time.</p>
+            <a class="card btn btn-primary" href="{% url 'studies:trends' %}">Click Here!</a>
+        </div>
     </div>
 </div>
 
 {% endblock content %}
+</body>
 </html>
