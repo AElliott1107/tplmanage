@@ -156,4 +156,4 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
