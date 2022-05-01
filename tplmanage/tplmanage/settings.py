@@ -80,17 +80,16 @@ WSGI_APPLICATION = 'tplmanage.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if os.environ.get('DATABASE_URL', None):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'heroku_d8dd69f03cb9f1a',
-            'USER': 'b76861215c6115',
-            'PASSWORD': 'aaca0107',
-            'HOST': 'us-cdbr-east-05.cleardb.net',
-            'PORT': '3306',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'outsource',
+        'USER': 'appadmin',
+        'PASSWORD': 'outsourcing',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
+}
 
 
 # Password validation
